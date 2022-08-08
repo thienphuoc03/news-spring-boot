@@ -5,4 +5,4 @@
 
 2. Change mysql username and password
 - open file "src/main/resources/application.properties"
-- change username and password of mysql
+- change "spring.datasource.username" and "spring.datasource.password" your mysql
