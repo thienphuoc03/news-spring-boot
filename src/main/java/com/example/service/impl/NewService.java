@@ -52,14 +52,14 @@ public class NewService implements iNewService {
 
 	@Override
 	public List<NewDTO> findAll(Pageable pageable) {
-		List<NewDTO> results = new ArrayList<>();
+		List<NewDTO> result = new ArrayList<>();
 		List<NewEntity> entities = newRepository.findAll(pageable).getContent();
 		for (NewEntity item : entities) {
 			NewDTO newDTO = newMapper.toDTO(item);
-			results.add(newDTO);
+			result.add(newDTO);
 		}
 
-		return results;
+		return result;
 	}
 
 	@Override
@@ -69,14 +69,27 @@ public class NewService implements iNewService {
 
 	@Override
 	public List<NewDTO> findAll() {
-		List<NewDTO> results = new ArrayList<>();
+		List<NewDTO> result = new ArrayList<>();
 		List<NewEntity> entities = newRepository.findAll();
 		for (NewEntity item : entities) {
 			NewDTO newDTO = newMapper.toDTO(item);
-			results.add(newDTO);
+			result.add(newDTO);
 		}
 
-		return results;
+		return result;
+	}
+
+	@Override
+	public List<NewDTO> searchNews(String keyword) {
+		List<NewDTO> result = new ArrayList<>();
+		List<NewEntity> entities = newRepository.findAll();
+		for (NewEntity news : entities) {
+			if (news.getTitle().contains(keyword)) {
+				result.add(newMapper.toDTO(news));
+			}
+		}
+
+		return result;
 	}
 
 //	@Override

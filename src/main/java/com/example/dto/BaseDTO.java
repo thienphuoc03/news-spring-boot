@@ -6,17 +6,20 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class AbstractDTO<T> {
+public class BaseDTO<T> {
 
 	private Long id;
+
 	private String createdBy;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createdDate;
+
 	private String modifiedBy;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date modifiedDate;
+
 	private List<T> listResult = new ArrayList<>();
 
 	public Long getId() {

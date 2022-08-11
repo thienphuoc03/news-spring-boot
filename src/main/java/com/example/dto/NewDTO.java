@@ -1,6 +1,6 @@
 package com.example.dto;
 
-public class NewDTO extends AbstractDTO<NewDTO> {
+public class NewDTO extends BaseDTO<NewDTO> {
 
 	private String title;
 	private String content;

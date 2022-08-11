@@ -1,8 +1,12 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +31,7 @@ public class NewController {
 	@Autowired
 	private iNewService newService;
 
-	@GetMapping("")
+	@GetMapping
 	public NewOutput showNew(@RequestParam(name = "page", required = false) Integer page,
 			@RequestParam(name = "limit", required = false) Integer limit) {
 		NewOutput result = new NewOutput();
@@ -43,7 +47,15 @@ public class NewController {
 		return result;
 	}
 
-	@PostMapping("")
+	@GetMapping("/search")
+	public ResponseEntity<?> searchNews(
+			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword) {
+		List<NewDTO> listNews = newService.searchNews(keyword);
+
+		return new ResponseEntity(listNews, HttpStatus.OK);
+	}
+
+	@PostMapping
 	public NewDTO createNew(@RequestBody NewDTO model) {
 		return newService.save(model);
 	}
@@ -54,7 +66,7 @@ public class NewController {
 		return newService.save(model);
 	}
 
-	@DeleteMapping("")
+	@DeleteMapping
 	public void deleteNew(@RequestBody long[] ids) {
 		newService.delete(ids);
 	}

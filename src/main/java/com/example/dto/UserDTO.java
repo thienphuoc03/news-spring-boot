@@ -1,6 +1,6 @@
 package com.example.dto;
 
-public class UserDTO extends AbstractDTO<UserDTO> {
+public class UserDTO extends BaseDTO<UserDTO> {
 
 	private String username;
 	private String password;
