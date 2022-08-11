@@ -1,7 +1,9 @@
 "# news-spring-boot"
 
 **1. Create Mysql database**
-- create database newspringboot
+```bash
+create database newspringboot
+```
 
 **2. Change mysql username and password**
 - open file ```src/main/resources/application.properties```
