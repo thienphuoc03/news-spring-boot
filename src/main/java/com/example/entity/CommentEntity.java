@@ -6,16 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "comment")
 public class CommentEntity extends BaseEntity {
 
@@ -25,6 +16,9 @@ public class CommentEntity extends BaseEntity {
 	@Column(name = "userid")
 	private Long userId;
 
+	@Column(name = "newid")
+	private Long newId;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
@@ -33,6 +27,44 @@ public class CommentEntity extends BaseEntity {
 	@JoinColumn(name = "new_id")
 	private NewEntity news;
 
-	@Column(name = "newid")
-	private Long newId;
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Long getNewId() {
+		return newId;
+	}
+
+	public void setNewId(Long newId) {
+		this.newId = newId;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+
+	public NewEntity getNews() {
+		return news;
+	}
+
+	public void setNews(NewEntity news) {
+		this.news = news;
+	}
+
 }
