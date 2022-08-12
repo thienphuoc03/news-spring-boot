@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.NewDTO;
@@ -90,6 +92,13 @@ public class NewService implements iNewService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public ResponseEntity<NewDTO> getNews(long id) {
+		NewEntity newEntity = newRepository.findOne(id);
+		NewDTO newDto = newMapper.toDTO(newEntity);
+		return new ResponseEntity<>(newDto, HttpStatus.OK);
 	}
 
 //	@Override

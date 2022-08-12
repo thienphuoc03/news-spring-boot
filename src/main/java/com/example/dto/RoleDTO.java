@@ -1,6 +1,6 @@
 package com.example.dto;
 
-public class RoleDTO {
+public class RoleDTO extends BaseDTO<RoleDTO> {
 	private String code;
 	private String name;
 

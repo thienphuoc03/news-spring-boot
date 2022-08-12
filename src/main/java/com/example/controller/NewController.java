@@ -22,7 +22,7 @@ import com.example.dto.NewDTO;
 import com.example.service.iNewService;
 
 @RestController
-@RequestMapping("/api/new")
+@RequestMapping("/api/news")
 public class NewController {
 
 //	@RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -47,12 +47,17 @@ public class NewController {
 		return result;
 	}
 
+	@GetMapping("/{id}")
+	public ResponseEntity<NewDTO> getNews(@PathVariable(name = "id") long id) {
+		return newService.getNews(id);
+	}
+
 	@GetMapping("/search")
 	public ResponseEntity<?> searchNews(
 			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword) {
 		List<NewDTO> listNews = newService.searchNews(keyword);
 
-		return new ResponseEntity(listNews, HttpStatus.OK);
+		return new ResponseEntity<>(listNews, HttpStatus.OK);
 	}
 
 	@PostMapping

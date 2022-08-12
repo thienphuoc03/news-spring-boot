@@ -1,9 +1,9 @@
 package com.example.dto;
 
-public class CommentDTO {
+public class CommentDTO extends BaseDTO<CommentDTO> {
 	private String content;
-	private String newId;
-	private String userId;
+	private Long newId;
+	private Long userId;
 
 	public String getContent() {
 		return content;
@@ -13,19 +13,19 @@ public class CommentDTO {
 		this.content = content;
 	}
 
-	public String getNewId() {
+	public Long getNewId() {
 		return newId;
 	}
 
-	public void setNewId(String newId) {
+	public void setNewId(Long newId) {
 		this.newId = newId;
 	}
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

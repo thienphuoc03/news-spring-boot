@@ -43,7 +43,7 @@ public class UserSevice implements iUserSevice {
 			}
 		}
 
-		return null;
+		throw new com.example.exception.NotFoundException("NOT_FOUND_USER_IN_SYSTEM");
 	}
 
 }

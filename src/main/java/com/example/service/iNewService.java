@@ -3,6 +3,7 @@ package com.example.service;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.example.dto.NewDTO;
@@ -22,4 +23,6 @@ public interface iNewService {
 	void delete(long[] ids);
 
 	List<NewDTO> searchNews(String keyword);
+
+	ResponseEntity<NewDTO> getNews(long id);
 }
