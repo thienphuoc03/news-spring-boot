@@ -3,11 +3,11 @@ package com.example.mapper;
 import org.springframework.stereotype.Component;
 
 import com.example.dto.UserDTO;
-import com.example.entity.UserEntity;
+import com.example.model.User;
 
 @Component
 public class UserMapper {
-	public UserDTO toDto(UserEntity userEntity) {
+	public UserDTO toDto(User userEntity) {
 		UserDTO userDto = new UserDTO();
 		userDto.setId(userEntity.getId());
 		userDto.setUsername(userEntity.getUserName());

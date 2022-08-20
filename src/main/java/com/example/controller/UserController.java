@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.UserDTO;
-import com.example.service.impl.UserSevice;
+import com.example.service.impl.UserSeviceImpl;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
 	@Autowired
-	private UserSevice userService;
+	private UserSeviceImpl userService;
 
 	@GetMapping
 	public ResponseEntity<?> getListUser() {

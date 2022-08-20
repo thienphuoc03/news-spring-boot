@@ -2,14 +2,14 @@ package com.example.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.dto.NewDTO;
-import com.example.entity.NewEntity;
+import com.example.dto.NewsDTO;
+import com.example.model.News;
 
 @Component
 public class NewMapper {
 
-	public NewEntity toEntity(NewDTO dto) {
-		NewEntity entity = new NewEntity();
+	public News toEntity(NewsDTO dto) {
+		News entity = new News();
 		entity.setTitle(dto.getTitle());
 		entity.setContent(dto.getContent());
 		entity.setShortDescription(dto.getShortDescription());
@@ -18,8 +18,8 @@ public class NewMapper {
 		return entity;
 	}
 
-	public NewDTO toDTO(NewEntity entity) {
-		NewDTO dto = new NewDTO();
+	public NewsDTO toDTO(News entity) {
+		NewsDTO dto = new NewsDTO();
 		if (entity.getId() != null) {
 			dto.setId(entity.getId());
 		}
@@ -35,7 +35,7 @@ public class NewMapper {
 		return dto;
 	}
 
-	public NewEntity toEntity(NewDTO dto, NewEntity entity) {
+	public News toEntity(NewsDTO dto, News entity) {
 		entity.setTitle(dto.getTitle());
 		entity.setContent(dto.getContent());
 		entity.setShortDescription(dto.getShortDescription());

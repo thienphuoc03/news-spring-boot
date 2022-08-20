@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.controller.output.NewOutput;
-import com.example.dto.NewDTO;
-import com.example.service.iNewService;
+import com.example.dto.NewsDTO;
+import com.example.service.NewService;
 
 @RestController
 @RequestMapping("/api/news")
@@ -29,7 +29,7 @@ public class NewController {
 //	@ResponseBody
 
 	@Autowired
-	private iNewService newService;
+	private NewService newService;
 
 	@GetMapping
 	public NewOutput showNew(@RequestParam(name = "page", required = false) Integer page,
@@ -48,25 +48,25 @@ public class NewController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<NewDTO> getNews(@PathVariable(name = "id") long id) {
+	public ResponseEntity<NewsDTO> getNews(@PathVariable(name = "id") long id) {
 		return newService.getNews(id);
 	}
 
 	@GetMapping("/search")
 	public ResponseEntity<?> searchNews(
 			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword) {
-		List<NewDTO> listNews = newService.searchNews(keyword);
+		List<NewsDTO> listNews = newService.searchNews(keyword);
 
 		return new ResponseEntity<>(listNews, HttpStatus.OK);
 	}
 
 	@PostMapping
-	public NewDTO createNew(@RequestBody NewDTO model) {
+	public NewsDTO createNew(@RequestBody NewsDTO model) {
 		return newService.save(model);
 	}
 
 	@PutMapping("/{id}")
-	public NewDTO updateNew(@RequestBody NewDTO model, @PathVariable("id") long id) {
+	public NewsDTO updateNew(@RequestBody NewsDTO model, @PathVariable("id") long id) {
 		model.setId(id);
 		return newService.save(model);
 	}

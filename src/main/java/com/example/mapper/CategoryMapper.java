@@ -3,11 +3,11 @@ package com.example.mapper;
 import org.springframework.stereotype.Component;
 
 import com.example.dto.CategoryDTO;
-import com.example.entity.CategoryEntity;
+import com.example.model.Category;
 
 @Component
 public class CategoryMapper {
-	public CategoryDTO toDto(CategoryEntity categoryEntity) {
+	public CategoryDTO toDto(Category categoryEntity) {
 		CategoryDTO categoryDto = new CategoryDTO();
 		categoryDto.setId(categoryEntity.getId());
 		categoryDto.setCode(categoryEntity.getCode());
