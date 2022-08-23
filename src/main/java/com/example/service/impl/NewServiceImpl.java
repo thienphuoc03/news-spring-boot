@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,32 +54,8 @@ public class NewServiceImpl implements NewService {
 	}
 
 	@Override
-	public List<NewsDTO> findAll(Pageable pageable) {
-		List<NewsDTO> result = new ArrayList<>();
-		List<News> listNews = newRepository.findAll(pageable).getContent();
-		for (News news : listNews) {
-			NewsDTO newDTO = modelMapper.map(news, NewsDTO.class);
-			result.add(newDTO);
-		}
-
-		return result;
-	}
-
-	@Override
 	public int totalItem() {
 		return (int) newRepository.count();
-	}
-
-	@Override
-	public List<NewsDTO> findAll() {
-		List<NewsDTO> result = new ArrayList<>();
-		List<News> listNews = newRepository.findAll();
-		for (News news : listNews) {
-			NewsDTO newDTO = modelMapper.map(news, NewsDTO.class);
-			result.add(newDTO);
-		}
-
-		return result;
 	}
 
 	@Override
@@ -100,6 +77,31 @@ public class NewServiceImpl implements NewService {
 		News news = newRepository.findOne(id);
 		NewsDTO newDto = modelMapper.map(news, NewsDTO.class);
 		return new ResponseEntity<>(newDto, HttpStatus.OK);
+	}
+
+	@Override
+	public List<NewsDTO> getAllNews(Integer page, Integer size) {
+		List<NewsDTO> result = new ArrayList<>();
+		if (page != null && size != null) {
+			Pageable pageable = new PageRequest(page - 1, size);
+			List<News> listNews = newRepository.findAll(pageable).getContent();
+			for (News news : listNews) {
+				NewsDTO newDTO = modelMapper.map(news, NewsDTO.class);
+				result.add(newDTO);
+			}
+
+			return result;
+		} else {
+			List<News> listNews = newRepository.findAll();
+			for (News news : listNews) {
+				NewsDTO newDTO = modelMapper.map(news, NewsDTO.class);
+				result.add(newDTO);
+			}
+
+			return result;
+		}
+
+//		return null;
 	}
 
 //	@Override

@@ -3,8 +3,6 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.controller.output.NewOutput;
 import com.example.dto.NewsDTO;
 import com.example.service.NewService;
 
@@ -32,19 +29,11 @@ public class NewController {
 	private NewService newService;
 
 	@GetMapping
-	public NewOutput showNew(@RequestParam(name = "page", required = false) Integer page,
-			@RequestParam(name = "limit", required = false) Integer limit) {
-		NewOutput result = new NewOutput();
-		if (page != null && limit != null) {
-			result.setPage(page);
-			Pageable pageable = new PageRequest(page - 1, limit);
-			result.setListResult(newService.findAll(pageable));
-			result.setTotalPage((int) Math.ceil((double) (newService.totalItem()) / limit));
-		} else {
-			result.setListResult(newService.findAll());
-		}
+	public ResponseEntity<?> getAllNews(@RequestParam(name = "page", required = false, defaultValue = "") Integer page,
+			@RequestParam(name = "size", required = false, defaultValue = "") Integer size) {
+		List<NewsDTO> listNews = newService.getAllNews(page, size);
 
-		return result;
+		return new ResponseEntity<>(listNews, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")

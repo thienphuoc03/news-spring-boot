@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class Role extends Base {
 	@Column(name = "name")
 	private String name;
 
-	@ManyToMany(mappedBy = "roles")
+	@OneToMany(mappedBy = "roles")
 	private List<User> users = new ArrayList<>();
 
 }

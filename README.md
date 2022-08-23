@@ -2,7 +2,7 @@
 
 **1. Create Mysql database**
 ```bash
-create database newspringboot
+create database newsspringboot
 ```
 
 **2. Change mysql username and password**
@@ -15,6 +15,8 @@ create database newspringboot
 | Method | 				Url 				| 		Description 		| Sample Valid Request Body |
 |--------|----------------------------------|---------------------------|---------------------------|
 | GET | /categories | get all category | |
+| POST | /categories | create category | |
+| PUT | /categories/{id} | update category | |
 
 
 ### Users
@@ -28,7 +30,7 @@ create database newspringboot
 | Method | 				Url 				| 		Description 		| Sample Valid Request Body |
 |--------|----------------------------------|---------------------------|---------------------------|
 | GET | /news | get all news | |
-| GET | /news?page={page}&limit={limit} | get list news with paging | |
+| GET | /news?page={page}&size={size} | get list news with paging | |
 | GET | /news/{id} | get news by id | |
 | GET | /news/search?keyword={title} | search news by keyword | |
 | POST | /news | add news | [JSON] |

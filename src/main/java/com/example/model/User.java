@@ -6,8 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,9 +35,12 @@ public class User extends Base {
 	@Column(name = "status")
 	private Integer status;
 
-	@ManyToMany
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles = new ArrayList<>();
+//	@ManyToMany
+//	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//	private List<Role> roles = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role roles;
 
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments = new ArrayList<>();
