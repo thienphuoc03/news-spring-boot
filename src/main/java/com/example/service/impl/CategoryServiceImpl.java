@@ -47,12 +47,23 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public ResponseEntity<Category> updateCategory(CategoryDTO categoryDto) {
-//		Category category = new Category();
 		Category oldCategory = categoryRepository.findOne(categoryDto.getId());
 		if (oldCategory != null) {
 			oldCategory = modelMapper.map(categoryDto, oldCategory.getClass());
 			Category updateCategory = categoryRepository.save(oldCategory);
 			return new ResponseEntity<>(updateCategory, HttpStatus.OK);
+		}
+
+		throw new NotFoundException("CATEGORY_DOES_NOT_EXIST");
+	}
+
+	@Override
+	public ResponseEntity<HttpStatus> deleteCategory(Long id) {
+		Category category = categoryRepository.findOne(id);
+		if (category != null) {
+			categoryRepository.delete(id);
+
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
 		throw new NotFoundException("CATEGORY_DOES_NOT_EXIST");

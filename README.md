@@ -17,6 +17,7 @@ create database newsspringboot
 | GET | /categories | get all category | |
 | POST | /categories | create category | |
 | PUT | /categories/{id} | update category | |
+| DELETE | /categories/{id} | delete category | |
 
 
 ### Users
@@ -24,6 +25,9 @@ create database newsspringboot
 |--------|----------------------------------|---------------------------|---------------------------|
 | GET | /users | get all users | |
 | GET | /users/{id} | get user by id | |
+| POST | /users | create users | |
+| PUT | /users/{id} | update users | |
+| DELETE | /users/{id} | delete users | |
 
 
 ### News
