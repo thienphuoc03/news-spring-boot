@@ -10,9 +10,9 @@ public class UserMapper {
 	public UserDTO toDto(User userEntity) {
 		UserDTO userDto = new UserDTO();
 		userDto.setId(userEntity.getId());
-		userDto.setUsername(userEntity.getUserName());
+		userDto.setUsername(userEntity.getUsername());
 		userDto.setPassword(userEntity.getPassword());
-		userDto.setFullName(userEntity.getFullName());
+		userDto.setFullname(userEntity.getFullname());
 		userDto.setStatus(userEntity.getStatus());
 		userDto.setCreatedBy(userEntity.getCreatedBy());
 		userDto.setCreatedDate(userEntity.getCreatedDate());

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.UserDTO;
 import com.example.model.User;
-import com.example.service.impl.UserSeviceImpl;
+import com.example.service.impl.UserServiceImpl;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
 	@Autowired
-	private UserSeviceImpl userService;
+	private UserServiceImpl userService;
 
 	@GetMapping
 	public ResponseEntity<?> getListUser() {
@@ -38,7 +39,7 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
-//	@PostMapping
+	@PostMapping
 	public ResponseEntity<User> createUser(@RequestBody UserDTO userDTO) {
 		return userService.addUser(userDTO);
 	}

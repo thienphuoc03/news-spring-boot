@@ -10,7 +10,7 @@ import com.example.dto.UserDTO;
 import com.example.model.User;
 
 @Component
-public interface UserSevice {
+public interface UserService {
 	List<UserDTO> getAllUsers();
 
 	UserDTO getUserById(long id);
@@ -20,4 +20,6 @@ public interface UserSevice {
 	ResponseEntity<User> updateUser(UserDTO userDTO);
 
 	ResponseEntity<HttpStatus> deleteUser(Long id);
+
+	String passwordEncoding(String password);
 }

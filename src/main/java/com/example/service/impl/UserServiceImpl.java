@@ -7,22 +7,35 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.UserDTO;
 import com.example.exception.NotFoundException;
 import com.example.model.User;
+import com.example.repository.RoleRepository;
 import com.example.repository.UserRepository;
-import com.example.service.UserSevice;
+import com.example.service.UserService;
 
 @Service
-public class UserSeviceImpl implements UserSevice {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
+	private RoleRepository roleRepository;
+
+	@Autowired
 	private ModelMapper modelMapper;
+
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+
+	@Override
+	public String passwordEncoding(String password) {
+		return passwordEncoder.encode(password);
+	}
 
 	@Override
 	public List<UserDTO> getAllUsers() {
@@ -52,10 +65,18 @@ public class UserSeviceImpl implements UserSevice {
 	@Override
 	public ResponseEntity<User> addUser(UserDTO userDTO) {
 		User user = new User();
-		modelMapper.map(userDTO, user);
-		User newUser = userRepository.save(user);
 
-		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+		List<User> users = userRepository.findAll();
+		for (User item : users) {
+			if (userDTO.getUsername() != item.getUsername()) {
+				modelMapper.map(userDTO, user);
+				user.setPassword(passwordEncoding(userDTO.getPassword()));
+				User newUser = userRepository.save(user);
+
+				return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -82,4 +103,5 @@ public class UserSeviceImpl implements UserSevice {
 
 		throw new NotFoundException("User_DOES_NOT_EXIST");
 	}
+
 }

@@ -22,9 +22,6 @@ import com.example.service.NewService;
 @RequestMapping("/api/news")
 public class NewController {
 
-//	@RequestMapping(value = "/new", method = RequestMethod.POST)
-//	@ResponseBody
-
 	@Autowired
 	private NewService newService;
 
